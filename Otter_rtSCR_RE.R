@@ -7,7 +7,7 @@
 #                                                                              #
 #==============================================================================#
 
-setwd('C:/Users/Usuario/OneDrive/74 Proyecto Nutria PNTD/01 data/DEF')
+setwd('C:/.../BData')
 
 library(nimble)
 library(basicMCMCplots)
