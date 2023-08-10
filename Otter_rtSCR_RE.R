@@ -27,7 +27,6 @@ source("Functions_SCR.R")
 
 # Available habitat
 tablas <- raster("PNTD_ras.tif")
-projection(tablas) <- gsub("units=m", "units=km", projection(tablas))
 
 otterID.ch <- read.capthist("OtterData.txt", "OtterTraps.txt", 
   detector='count', cov="sex", noccasions=1)
