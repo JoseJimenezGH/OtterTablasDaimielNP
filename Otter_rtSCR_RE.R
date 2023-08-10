@@ -10,19 +10,13 @@
 setwd('C:/.../BData')
 
 library(nimble)
-library(basicMCMCplots)
 library(coda)
-library(lattice)
 library(raster)
 library(secr)
 library(jagsUI)
 library(makeJAGSmask)
 library(rgdal)
 library(scrbook)
-library(mcmcOutput)
-library(MCMCvis)
-library(tidyverse)
-library(ggplot2)
 source("Functions_SCR.R")
 
 # Available habitat
