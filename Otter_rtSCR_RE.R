@@ -27,16 +27,6 @@ source("Functions_SCR.R")
 
 # Available habitat
 tablas <- raster("PNTD_ras.tif")
-
-extent(tablas) <- extent(c(xmin(tablas), xmax(tablas), 
-                           ymin(tablas), ymax(tablas))/1000)
-minX0<-extent(c(xmin(tablas), xmax(tablas), ymin(tablas), ymax(tablas)))@xmin
-maxX0<-extent(c(xmin(tablas), xmax(tablas), ymin(tablas), ymax(tablas)))@xmax
-minY0<-extent(c(xmin(tablas), xmax(tablas), ymin(tablas), ymax(tablas)))@ymin
-maxY0<-extent(c(xmin(tablas), xmax(tablas), ymin(tablas), ymax(tablas)))@ymax
-
-extent(tablas) <- extent(c(xmin(tablas)-minX0, xmax(tablas)-minX0, 
-                           ymin(tablas)-minY0, ymax(tablas)-minY0))
 projection(tablas) <- gsub("units=m", "units=km", projection(tablas))
 
 otterID.ch <- read.capthist("OtterData.txt", "OtterTraps.txt", 
@@ -61,11 +51,6 @@ symbols(traplocs, circles=tot*100, inches=F,bg="#228B2219", fg=NULL, add=T)
 points(traplocs, pch="+", col="blue")
 # Spiderplot of ID
 spiderplotJJ5(otterID, traplocs, buffer=2000, lwd=1)
-
-# Scaling traps coordinates
-X<-X/1000
-X[,1]<-X[,1]- minX0
-X[,2]<-X[,2]- minY0
 
 # Data augmentation
 M<-50
@@ -221,7 +206,7 @@ str(inits    <- list(z = rep(1, M),
                      mu0=runif(1,-5,5),
                      sigma.p=runif(1,0,5),
                      y.full=yT,
-                     y.full.sim=yT,
+                     #y.full.sim=yT,
                      id.prob=id.prob.sst,
                      S = s.start))
 
