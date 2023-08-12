@@ -21,6 +21,13 @@ source("Functions_SCR.R")
 
 # Available habitat
 tablas <- raster("PNTD_ras.tif")
+extent(tablas) <- extent(c(xmin(tablas), xmax(tablas), ymin(tablas), ymax(tablas))/1000)
+minX0<-extent(c(xmin(tablas), xmax(tablas), ymin(tablas), ymax(tablas)))@xmin
+maxX0<-extent(c(xmin(tablas), xmax(tablas), ymin(tablas), ymax(tablas)))@xmax
+minY0<-extent(c(xmin(tablas), xmax(tablas), ymin(tablas), ymax(tablas)))@ymin
+maxY0<-extent(c(xmin(tablas), xmax(tablas), ymin(tablas), ymax(tablas)))@ymax
+
+extent(tablas) <- extent(c(xmin(tablas)-minX0, xmax(tablas)-minX0, ymin(tablas)-minY0, ymax(tablas)-minY0))
 
 otterID.ch <- read.capthist("OtterData.txt", "OtterTraps.txt", 
   detector='count', cov="sex", noccasions=1)
@@ -34,6 +41,9 @@ traplocs<-traps(otterID.ch)
 X<-data.matrix(traplocs)
 rownames(X)<-1:nrow(traplocs)
 colnames(X)<-c("X","Y")
+X<-X/1000
+X[,1]<-X[,1]- minX0
+X[,2]<-X[,2]- minY0
 
 # Plot of ID
 my_window <- extent(c(min(traplocs[,1])-1000, max(traplocs[,1])+1000, 
@@ -251,14 +261,14 @@ MCMC <- buildMCMC(conf)
 CompMCMC <- compileNimble(MCMC, project = Rmodel)
 
 ## Execute MCMC algorithm and extract samples
-nb <- 10000       # Burnin
-ni <- 50000 + nb  # Iters
+nb <- 50000       # Burnin
+ni <- 250000 + nb  # Iters
 nc <- 3           # Chains
 
 
 start.time2<-Sys.time()
 outNim <- runMCMC(CompMCMC, niter = ni , nburnin = nb , nchains = nc, 
-                  inits=inits, setSeed = TRUE, progressBar = TRUE, 
+                  inits=inits, setSeed = FALSE, progressBar = TRUE, 
                   samplesAsCodaMCMC = TRUE)
 end.time<-Sys.time()
 end.time-start.time2 # post-compilation run time
