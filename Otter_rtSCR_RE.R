@@ -90,7 +90,7 @@ code <- nimbleCode({
   
   for(j in 1:nTraps){
     eps[j] ~ dnorm(mu0, sd=sigma.p)
-    log(p0[j]) <- beta*Eff[j] + eps[j]
+    p0[j] <- exp(beta*Eff[j] + eps[j])
   }
 
   for (i in 1:M){             # loop through the augmented population
