@@ -1,1 +1,1 @@
-R + Nimble code and data from the article _Relaxation of territorial behavior in the Eurasian otter during low-water conditions in a Mediterranean river_, from Jiménez, J.; Del Río, L.; Godinho, R. and Ferreras, P.
+R + Nimble code and data from the article _Relaxation of territorial behavior in the Eurasian otter during low-water conditions in a Mediterranean river_, from José Jiménez, Lucía Del Río, Raquel Godinho and Pablo Ferreras.
